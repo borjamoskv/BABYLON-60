@@ -39,7 +39,9 @@ def test_skills_without_resources_abc(monkeypatch: pytest.MonkeyPatch, capsys: p
         ("$wait-what; $grill-me-v2", 3, ["grill-me-v2", "wait-what"]),
     ],
 )
-def test_cli_matches_workspace_router(query: str, expected_code: int, names: list[str], capsys: pytest.CaptureFixture[str]) -> None:
+def test_cli_matches_workspace_router(
+    query: str, expected_code: int, names: list[str], capsys: pytest.CaptureFixture[str]
+) -> None:
     import argparse
     from babylon60.cli.main_dispatcher import cmd_skills
 
@@ -70,9 +72,9 @@ def test_cli_does_not_route_catalog_only_or_wrong_role(capsys: pytest.CaptureFix
         ("global", "all", "handoff"),
         ("workspace", "ejecutor", "epistemic-simplifier"),
     ]:
-        assert cmd_skills(
-            argparse.Namespace(skills_action="route", scope=scope, role=role, query=query, json=True)
-        ) == 2
+        assert (
+            cmd_skills(argparse.Namespace(skills_action="route", scope=scope, role=role, query=query, json=True)) == 2
+        )
         assert json.loads(capsys.readouterr().out)["candidates"] == []
 
 
@@ -80,10 +82,19 @@ def test_cli_explicit_continuation(capsys: pytest.CaptureFixture[str]) -> None:
     import argparse
     from babylon60.cli.main_dispatcher import cmd_skills
 
-    assert cmd_skills(
-        argparse.Namespace(skills_action="route", scope="workspace", role="all", query="sigue",
-                           context="epistemic-simplifier", json=True)
-    ) == 0
+    assert (
+        cmd_skills(
+            argparse.Namespace(
+                skills_action="route",
+                scope="workspace",
+                role="all",
+                query="sigue",
+                context="epistemic-simplifier",
+                json=True,
+            )
+        )
+        == 0
+    )
     assert json.loads(capsys.readouterr().out)["name"] == "wait-what"
 
 

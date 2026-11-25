@@ -79,15 +79,15 @@
       "kind": "document_contract",
       "reason": "Reviewed documentary or external reference identifier",
       "evidence": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md#hf_transfer",
-      "context_sha256": "8f2fda58b351a436696023f5027004086fb3393f1ed3726158183ed53717217e"
+      "context_sha256": "c70cc1920ddec396afd8b87a5a8b68c8c631332d9719d195d3d5306c6f5d1ba6"
     },
     {
       "path": ".agents/skills/c5-ring0-babylon-kernel-project/references/modules/thermo-audit/MODULE.md",
       "symbol": "huggingface_hub",
       "kind": "external",
       "reason": "Nombre del paquete cliente Python externo de Hugging Face Hub citado en la guía de migración 1.x.",
-      "evidence": "4. **Transferencia y memoria:** Verifica la versión instalada del cliente y mide memoria máxima con una carga reproducible. En `huggingface_hub` 1.x se retiró `hf_transfer`; no prescribas su variable heredada ni atribuyas consumo nulo de RAM a una implementación nativa. Consulta la [migración oficial](https://huggingface.co/docs/huggingface_hub/en/concepts/migration#hf_transfer) y elige el modo soportado según la restricción de recursos; un modo de alto rendimiento no implica menor uso de memoria.",
-      "context_sha256": "8f2fda58b351a436696023f5027004086fb3393f1ed3726158183ed53717217e"
+      "evidence": "4. **Transferencia y memoria:** Verifica la versión instalada del cliente y mide memoria máxima con una carga reproducible. En `huggingface_hub` 1.x se retiró `hf_transfer`; no prescribas su variable heredada ni atribuyas consumo nulo de RAM a una implementación nativa. Consulta la [migración oficial](https://huggingface.co/docs/huggingface_hub/en/concepts/migration#hftransfer) y elige el modo soportado según la restricción de recursos; un modo de alto rendimiento no implica menor uso de memoria.",
+      "context_sha256": "c70cc1920ddec396afd8b87a5a8b68c8c631332d9719d195d3d5306c6f5d1ba6"
     },
     {
       "path": ".github/copilot-instructions.md",

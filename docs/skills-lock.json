@@ -2,7 +2,7 @@
   "schema_version": "3.2.0",
   "lock_scope": "repo",
   "catalog_sha256": "0faaea004b14501cd155f68c84157901cd12588313285e137e637aa6d4abae0a",
-  "snapshot_root_sha256": "915225c4ce9d36bf7c910905b0cb7b047abfd51786dddd2f19f1c87512ff5ecd",
+  "snapshot_root_sha256": "8b1bd96c55b7186576a2fe6f294df3c73eb0d8f906b5b76bd98f94540711315d",
   "total_skills": 77,
   "skills": {
     "anergy-purge-protocol": {
@@ -1355,9 +1355,9 @@
       "skill_id": "c5-ring0-babylon-kernel-project",
       "canonical_alias": "kernel-hub",
       "version": "1.0.0",
-      "artifact_sha256": "f38dac70aa39bc7d1242243fbbb28ad66c9ea8275132058e540856c374ae9432",
+      "artifact_sha256": "5c34e853aa406e40e448fdfe1809527331b047e2e5a0795ef6bdd9a94d2d752a",
       "artifact_provenance": "workspace_disk",
-      "tool_identity_hash": "54a2805244e218425ed5487f26613a25076cdc9a85c3a288219ee7403a0871ac",
+      "tool_identity_hash": "c2ae2acc3351f7c56abad550fd8d3c372ddf13e5b14ab4b1dc87dfc484e84046",
       "lockfile_ref": "skills-lock.json#c5-ring0-babylon-kernel-project@1.0.0",
       "domain": "kernel",
       "summary": "Enruta módulos BABYLON-60 del proyecto: SPSC, SQLite L0, arquitectura IDE, SharedManifest, launchd, Apple Silicon y auditoría de contención. Dispara con \"kernel-hub\", \"babylon kernel hub\", \"shared manifest\", \"thermo-audit\", \"rlhf sentinel\", \"apple-bypass\".",

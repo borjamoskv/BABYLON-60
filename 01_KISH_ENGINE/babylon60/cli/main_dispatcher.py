@@ -486,15 +486,11 @@ def cmd_skills(args: argparse.Namespace) -> int:
             and (role_filter == "all" or skill["role"] == role_filter)
         }
         try:
-            generated = json.loads(
-                ws_skills_dir.joinpath("skill_catalog.generated.json").read_text(encoding="utf-8")
-            )
+            generated = json.loads(ws_skills_dir.joinpath("skill_catalog.generated.json").read_text(encoding="utf-8"))
             with as_file(ws_skills_dir.joinpath("_skill_router.py")) as resolver_path:
                 resolver = run_path(str(resolver_path))
             records = [record for record in resolver["library_records"](generated) if record["name"] in eligible]
-            matches = resolver["select"](
-                query, records, getattr(args, "context", "") or "", policy=generated["policy"]
-            )
+            matches = resolver["select"](query, records, getattr(args, "context", "") or "", policy=generated["policy"])
             for match in matches:
                 relative = Path(match["module"])
                 if (
