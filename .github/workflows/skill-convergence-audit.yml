@@ -5,8 +5,12 @@ on:
     paths:
       - '.agents/skills/**'
       - 'tools/skill_library/**'
-      - 'scripts/c5_skills_ontology/build_skill_library.py'
-      - 'scripts/c5_skills_ontology/maintain_skill_library.py'
+      - 'scripts/c5_skills_ontology/**'
+      - 'docs/skills.json'
+      - 'docs/skills-lock.json'
+      - 'skills-lock.json'
+      - 'docs/03_guides/guide_skill_arsenal_taxonomy.md'
+      - 'AGENTS.md'
       - 'scripts/c5_quality_gates/*skill*.py'
       - 'scripts/c5_quality_gates/audit_semantic_contracts.py'
       - 'tests/test_skill*.py'
@@ -20,8 +24,12 @@ on:
     paths:
       - '.agents/skills/**'
       - 'tools/skill_library/**'
-      - 'scripts/c5_skills_ontology/build_skill_library.py'
-      - 'scripts/c5_skills_ontology/maintain_skill_library.py'
+      - 'scripts/c5_skills_ontology/**'
+      - 'docs/skills.json'
+      - 'docs/skills-lock.json'
+      - 'skills-lock.json'
+      - 'docs/03_guides/guide_skill_arsenal_taxonomy.md'
+      - 'AGENTS.md'
       - 'scripts/c5_quality_gates/*skill*.py'
       - 'scripts/c5_quality_gates/audit_semantic_contracts.py'
       - 'tests/test_skill*.py'
@@ -56,6 +64,7 @@ jobs:
             tests/test_skills_manifest.py
             tests/test_skill_links.py
             tests/test_skills_installed_distribution.py
+            tests/test_skills_generators.py
           )
           if python3 -c 'from pathlib import Path; from scripts.c5_quality_gates.public_projection import load_omitted_prefixes; raise SystemExit(0 if "tools/skill_library" in load_omitted_prefixes(Path(".")) else 1)'; then
             echo "NOT_CHECKED: tools/skill_library convergence tests omitted by public projection"
@@ -88,6 +97,12 @@ jobs:
           else
             python3 scripts/c5_quality_gates/audit_skill_links.py --root .artifacts/codex --root .artifacts/workspace --root .artifacts/antigravity --local-only --output .artifacts/local-links.json
           fi
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: skill-local-link-evidence
+          path: .artifacts/local-links.json
+          include-hidden-files: true
   remote-links:
     if: github.repository != 'borjamoskv/BABYLON-60-VAULT' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
@@ -114,4 +129,6 @@ jobs:
         if: always()
         with:
           name: skill-link-evidence
-          path: .artifacts/*links.json
+          path: .artifacts/remote-links.json
+          include-hidden-files: true
+          if-no-files-found: error

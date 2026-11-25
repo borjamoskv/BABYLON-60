@@ -1,6 +1,6 @@
 ---
 title: MOSKV-1 — Taxonomía Arsenal de Skills por Exergía
-status: Causal-Determinist (Verified Physical & Theoretical Arsenal)
+status: Catalog taxonomy (not runtime verification)
 version: 26.200
 ---
 
@@ -8,7 +8,7 @@ version: 26.200
 
 <div align="center">
 
-[![C5-REAL Verified](https://img.shields.io/badge/C5--REAL-Verified-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
+[![C5-REAL Catalog](https://img.shields.io/badge/C5--REAL-Catalog-00F0FF?style=for-the-badge&logo=shield)](https://github.com/borjamoskv/BABYLON-60)
 [![Régimen](https://img.shields.io/badge/Régimen-Causal--Determinist-7B1FA2?style=for-the-badge)](https://github.com/borjamoskv/BABYLON-60)
 
 </div>
@@ -19,14 +19,18 @@ version: 26.200
 ```yaml
 Fecha: 2026-11-17T18:45:00+01:00
 Operador: borjamoskv
-Total_Skills_Fisicos: 77
-Densidad_Exergia_Promedio: 20000.39 / 23.000
+Total_Entradas_Catalogo_Global: 77
+Entradas_Distribucion_Workspace: 22
+Media_Tier_Catalogo_Global: 20000.39
+Media_Tier_Distribucion_Workspace: 20009.09
 Clasificacion: Niveles de Exergía Termodinámica (S → D)
-Estado_Colisiones: 0 Colisiones Residuales (Ortogonalidad Absoluta)
+Estado_Colisiones: requiere evidencia de la suite de convergencia
 Regla_Linguistica: Soberanía Lingüística Total (C5-REAL en Español / GitHub Estrictamente en Inglés)
 ```
 
 ---
+
+El [catálogo global](../skills.json) registra capacidades; el [catálogo workspace](../../.agents/skills/skills.json) describe las entradas distribuidas en el proyecto. El [lockfile](../../skills-lock.json) distingue `workspace_disk` de `catalog_synthetic`. Los registros sintéticos no prueban la disponibilidad física en este checkout. Los tiers son índices internos de clasificación, no mediciones físicas ni garantías. La selección no autoriza la ejecución. La convergencia entre distribuciones requiere la ejecución de la suite correspondiente en la fuente canónica; una proyección pública no acredita recursos omitidos.
 
 ## 1. Topología Funtorial y Grafos de Adyacencia (MASS Stage 2)
 

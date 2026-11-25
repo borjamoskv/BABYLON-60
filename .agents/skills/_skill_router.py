@@ -60,8 +60,10 @@ def selection_policy() -> SelectionPolicy:
     raise ValueError("Canonical routing policy is missing; regenerate this distribution")
 
 
-def select(query: str, records: Sequence[RouteRecord], context: str = "") -> list[RouteRecord]:
-    policy = selection_policy()
+def select(
+    query: str, records: Sequence[RouteRecord], context: str = "", *, policy: SelectionPolicy | None = None
+) -> list[RouteRecord]:
+    policy = selection_policy() if policy is None else policy
     generic = {normalize(value) for value in policy["generic"]}
     continuations = {normalize(value) for value in policy["continuations"]}
     query = normalize(query)
@@ -124,6 +126,24 @@ def select(query: str, records: Sequence[RouteRecord], context: str = "") -> lis
     return selected
 
 
+def library_records(catalog: dict) -> list[RouteRecord]:
+    """Build selection records from the generated distribution, without loading procedures."""
+    records: list[RouteRecord] = []
+    for name, capability in catalog["capabilities"].items():
+        module = capability.get("module")
+        intent: RouteIntent = capability["intent"].copy()
+        intent.setdefault("actions", catalog["policy"]["default_actions"])
+        records.append(
+            {
+                "name": name,
+                "aliases": capability["aliases"],
+                "intent": intent,
+                "module": str(Path(module["hub"]) / module["path"]) if module else name + "/SKILL.md",
+            }
+        )
+    return records
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--query", required=True)
@@ -137,19 +157,7 @@ def main() -> int:
         records: list[RouteRecord] = json.loads((root / "references/aliases.json").read_text())["modules"]
     else:
         catalog = json.loads((root / "skill_catalog.generated.json").read_text())
-        records = []
-        for name, capability in catalog["capabilities"].items():
-            module = capability.get("module")
-            intent: RouteIntent = capability["intent"].copy()
-            intent.setdefault("actions", catalog["policy"]["default_actions"])
-            records.append(
-                {
-                    "name": name,
-                    "aliases": capability["aliases"],
-                    "intent": intent,
-                    "module": str(Path(module["hub"]) / module["path"]) if module else name + "/SKILL.md",
-                }
-            )
+        records = library_records(catalog)
     matches = select(args.query, records, args.context)
     result = []
     for record in matches:

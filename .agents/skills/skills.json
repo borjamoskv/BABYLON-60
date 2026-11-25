@@ -3,8 +3,8 @@
   "updated_at": "2026-11-16T21:48:00Z",
   "exergy_scale_standard": "COMPILER_DERIVED_3_EVALUATORS (E1_Silicon + E2_Kolmogorov + E3_Causal = 21000)",
   "total_skills": 22,
-  "average_exergy_density": 20000.39,
-  "description": "Grafo de adyacencia y topología conectada de las 77 habilidades soberanas del ecosistema CORTEX Engine integrado en BABYLON-60 (100% COMPILER_DERIVED)",
+  "average_exergy_density": 20009.09,
+  "description": "Catálogo de distribución workspace: 22 entradas con SKILL.md; 22 con tier de clasificación (no evidencia de ejecución).",
   "entries": [
     {
       "name": "apple-bypass",
