@@ -4,41 +4,51 @@
 
 **English** · [Español](README_ES.md)
 
-**More intelligence. Not more authority.**
+**Run AI agents with explicit permissions.**
 
-BABYLON-60 provides local controls for AI agents: OS confinement for their
-processes and signed authorization for selected MCP tools. The model proposes
-an action; the configured policy and operator determine its permissions.
+BABYLON-60 limits which files an AI agent can read or change. It also provides
+a local MCP event ledger and signed authorization for selected MCP tools.
+The model proposes actions; the configured policy and operator control permissions.
 
 [![Python Tests](https://github.com/borjamoskv/BABYLON-60/actions/workflows/python-tests.yml/badge.svg?branch=main)](https://github.com/borjamoskv/BABYLON-60/actions/workflows/python-tests.yml)
 [![Verify Claims](https://github.com/borjamoskv/BABYLON-60/actions/workflows/verify_claims.yml/badge.svg?branch=main)](https://github.com/borjamoskv/BABYLON-60/actions/workflows/verify_claims.yml)
 [![License](https://img.shields.io/badge/license-Sovereign_Dual--License_·_not_OSI--approved-F3F52B?style=flat-square&labelColor=171717)](LICENSE)
 
 > [!IMPORTANT]
-> **Security alpha.** Confinement and the broker have separate setup paths.
-> `babylon60 run` does not enable the broker; installing a client integration
-> does not confine that client. No command here combines both layers.
-> Guarantees apply only to the [declared scope and evidence](#what-is-verified).
+> **Security alpha.** Process confinement and MCP authorization are configured
+> separately. `run` does not enable the broker; client setup does not confine
+> the client. See the [scope and evidence](#what-is-verified).
 
-[Try it](#try-it-in-5-minutes) · [With your agent](#with-your-agent) ·
-[Install / integrate](#installation) · [Troubleshooting](#troubleshooting) ·
-[Limits](#what-run-does-not-stop) ·
-[Verify](#what-is-verified) · [Reference](#documentation) ·
-[FAQ](#frequently-asked-questions)
+## Start here
 
-## What works today
+| You want to… | Follow this path |
+| :--- | :--- |
+| Try file confinement | [Get the source](#get-the-source), then run the [demo](#quick-start) on macOS or Linux. |
+| Run Codex or Claude Code with file restrictions | [Install](#installation), then [launch your agent](#with-your-agent). |
+| Add the local MCP server to a client | [Install](#installation), then [connect a client](#connect-a-client-optional). |
+
+[Troubleshooting](#troubleshooting) · [Limits](#what-run-does-not-stop) ·
+[Evidence](#what-is-verified) · [Reference](#documentation) · [FAQ](#frequently-asked-questions)
+
+<a id="what-works-today"></a>
+
+## Platform support
 
 | Capability | macOS | Linux x86_64 | Windows |
 | :--- | :--- | :--- | :--- |
 | Process confinement (`run`, `demo`) | Seatbelt | Landlock ABI 3+ and seccomp | No backend |
-| CLI and MCP event ledger | Yes | Yes | Tested on Python 3.11 / 3.12 |
+| CLI and MCP event ledger | Yes | Yes | [Recorded pass: Python 3.11 / 3.12](https://github.com/borjamoskv/BABYLON-60/actions/runs/44682649397) |
 | MCP effect broker (alpha) | Native library and Touch ID required | No approval helper | No |
 
-`run` restricts file access and leaves the network open. The MCP server stores
-SQLite events with provenance supplied by the caller; this does not validate
-whether an event is an original source or a sound inference.
+`run` restricts file access; **network connections remain open**.
 
-## Try it in 5 minutes
+The Windows result is from **20 November 2026**, not a check of every revision.
+The Python badge above runs on Linux; see [native Windows CI](https://github.com/borjamoskv/BABYLON-60/actions/workflows/windows-terminal.yml)
+for Windows installation and MCP results.
+
+<a id="try-it-in-5-minutes"></a>
+
+## Quick start
 
 **Requirements:** Python 3.11+ and [`uv`](https://docs.astral.sh/uv/getting-started/installation/);
 `git` is needed only to clone. The demo also needs macOS with
@@ -48,20 +58,17 @@ should follow [Installation](#installation); the confinement demo is unavailable
 
 ### Get the source
 
-Clone once on any platform, or extract the terminal source ZIP into a new folder.
-For a clone, these commands also work in PowerShell:
+Use a clean clone or extract a terminal source ZIP into a new folder.
+These clone commands work in Bash and PowerShell:
 
 ```console
 git clone --depth 1 https://github.com/borjamoskv/BABYLON-60.git
 cd BABYLON-60
 ```
 
-Already have the source? Open its root folder and skip cloning. Then choose:
-
-| Goal | Next step |
-| :--- | :--- |
-| Try confinement on macOS / Linux | Run the demo below |
-| Install the CLI or integrate MCP, including on Windows | Follow [Installation](#installation) |
+Already have the source? Open its root folder and skip cloning. Installation
+time depends on dependency downloads and your cache. To skip the demo,
+follow [Installation](#installation).
 
 **Demo — macOS / Linux only:**
 
@@ -69,58 +76,28 @@ Already have the source? Open its root folder and skip cloning. Then choose:
 bash install.sh --demo
 ```
 
-The installer creates the CLI in the source folder's `.venv`; it does not add it to
-PATH. The demo uses a Python attacker script, **not an LLM**, to follow a
-malicious README instruction against a decoy key in a disposable home.
-It never touches your real `~/.ssh`.
+This installs the CLI and runs a Python test script against a decoy key in a
+disposable home. The script follows a malicious README instruction; **no LLM
+or model account is involved**, and your real `~/.ssh` is untouched.
 
-Look for `verdict: BLOCKED` and exit code 0. This requires successful positive
-controls and every counted attack to be blocked. Exit 1 means `FALSIFIED`,
-2 means `INCONCLUSIVE`, and 3 means no confinement backend. Vector totals vary
-by platform and revision; historical counts are in the
+Read the verdict and exit code:
+
+| Exit code | Meaning |
+| :--- | :--- |
+| `0` — `BLOCKED` | Every counted demo attack was blocked and the positive controls passed. |
+| `1` — `FALSIFIED` | The demo's blocking criterion failed. |
+| `2` — `INCONCLUSIVE` | The run did not establish a result; inspect its diagnostics. |
+| `3` | No supported confinement backend was available. |
+
+Vector totals vary by platform and revision; historical counts are in the
 [demo reference](docs/03_guides/README_REFERENCE.md#demo-methodology-and-recorded-runs).
-
-## With your agent
-
-**macOS / Linux only.** [Install Babylon](#installation) and your agent's CLI
-first. Then run from **your project's directory**, replacing `$HOME/BABYLON-60`
-with the absolute source path. Keep the quotes so paths with spaces also work.
-
-**Codex:**
-
-```bash
-cd "$HOME/your-project"
-"$HOME/BABYLON-60/.venv/bin/babylon60" run --preset codex -- codex
-```
-
-**Or Claude Code:**
-
-```bash
-cd "$HOME/your-project"
-"$HOME/BABYLON-60/.venv/bin/babylon60" run --preset claude-code -- claude
-```
-
-Write access covers the workspace, private temporary directory and paths the
-preset grants for writing; Linux also allows `/dev/shm`. Other home-directory
-files are withheld unless granted. These actions need no broker signature.
-
-- Use `--dry-run` to inspect the policy; `run --help` lists all options.
-- Presets retain their agent's own credentials. `--pass-env NAME` explicitly
-  allows other credential-like environment variables.
-- `run` rejects the Babylon clone, your home or its ancestors, and shared
-  sticky directories such as `/tmp` as workspaces. Grants covering protected
-  credential paths are also rejected.
-- Recorded client checks cover confined `claude --version` and `codex --version`
-  on Linux x86_64. Full LLM sessions remain `NO_VERIFICADO`.
-
-[Grants, flags and compatibility details](docs/03_guides/README_REFERENCE.md#with-your-agent).
 
 ## Installation
 
-Use the source checkout, not `pip install babylon60`: the PyPI name belongs
-to an older 1.0.2 package with different content. The installer needs `uv`,
-Python 3.11+ and a clean checkout. It installs the terminal CLI and MCP server,
-without opening a desktop app.
+Use these installers: `pip install babylon60` refers to an older 1.0.2 package
+with different content. You need Python 3.11+, `uv` and a clean source folder.
+The installers put the CLI and MCP server in `.venv`, without opening a desktop
+app or adding commands to PATH.
 
 [Get the source](#get-the-source) first. Run these commands from its root folder.
 **macOS / Linux:** skip `bash install.sh` if you already installed via the demo.
@@ -130,57 +107,107 @@ bash install.sh
 .venv/bin/babylon60 --help
 ```
 
-**Windows (PowerShell):** install from a clean clone or the source ZIP.
-Windows supports the CLI and MCP server, not process confinement:
+**Windows (PowerShell):**
 
 ```powershell
-pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -DryRun
 pwsh -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 .\.venv\Scripts\babylon60.exe --help
 ```
 
-`powershell` also works if `pwsh` is unavailable. `-ExecutionPolicy` affects
-only that process. A dry run previews installation; it does not install anything.
+Use `powershell` if `pwsh` is unavailable. `-ExecutionPolicy` affects only that
+process. Add `-DryRun` to the installer command to preview without installing.
 
-**Check:** `--help` should print usage and commands including `setup`, `doctor`
-and `run`. This confirms the CLI starts. Client integration is a separate step.
+**Check:** `--help` should list `setup`, `doctor` and `run`. This confirms the
+CLI starts. Next, [launch an agent](#with-your-agent) or connect a client below.
 
 ### Connect a client (optional)
 
-**macOS / Linux:**
+Run from **Babylon's source folder**. Replace `codex` with `claude`, `cursor` or
+`gemini` as needed; Codex requires its CLI in PATH. Setup registers MCP and
+managed instructions in the client's configuration.
+
+**1. Preview the changes — macOS / Linux:**
 
 ```bash
 .venv/bin/babylon60 setup --client codex --dry-run
+```
+
+**Or Windows (PowerShell):**
+
+```powershell
+.\.venv\Scripts\babylon60.exe setup --client codex --dry-run
+```
+
+**2. After reviewing the preview, apply and check — macOS / Linux:**
+
+```bash
 .venv/bin/babylon60 setup --client codex
 .venv/bin/babylon60 doctor --client codex
 ```
 
-**Windows (PowerShell):**
+**Or Windows (PowerShell):**
 
 ```powershell
-.\.venv\Scripts\babylon60.exe setup --client codex --dry-run
 .\.venv\Scripts\babylon60.exe setup --client codex
 .\.venv\Scripts\babylon60.exe doctor --client codex
 ```
 
-For either platform, replace `codex` with `claude`, `cursor` or `gemini` as
-needed; Codex integration requires its CLI in PATH. Setup registers MCP and
-managed instructions in the client's configuration. Inspect the dry run,
-then open a **new conversation**. `doctor` checks configuration and probes MCP
-directly; it does not prove that the client loads or follows the integration.
+**Check:** exit code 0, with `configuration`, `executable`, `mcp` and `contract`
+all `OK`. Then open a **new conversation** in your client. `doctor` probes MCP
+directly; `behavior: NO_VERIFICADO` and, outside Codex, `client_loading: NO_VERIFICADO`
+mark the client behavior it has not tested.
 
 **Gemini:** configuration belongs in `~/.gemini`, or
 `$GEMINI_CLI_HOME/.gemini` with an alternative home. Run `gemini mcp list` to
 check discovery; folder trust can still disable a listed server. Rerunning
 setup repairs older wrong-root registrations and preserves the old files.
 
-State remains in `~/.babylon60` (or `$BABYLON_HOME`). The manifest labels
-v5.1.0 as `candidate`; the Git tag predates `run`, `demo` and `log`. In a Git
-checkout, record `git rev-parse HEAD`; for an extracted ZIP, read `commit` in
-`RELEASE_MANIFEST.json`. The ZIP contains the CLI and selected guides, not the
-complete Rust workspace. Links marked **↗** open the full repository online.
+State lives in `~/.babylon60` (or `$BABYLON_HOME`). Client registrations point to
+the installation's Python executable; keep that folder in place. If you move it,
+follow [Troubleshooting](#troubleshooting) before removing the old installation.
+
+The ZIP contains the CLI and selected guides, not the complete Rust workspace.
+Links marked **↗** open the full repository online.
 
 [Advanced setup and removal](docs/03_guides/README_REFERENCE.md#installation).
+
+## With your agent
+
+**macOS / Linux only.** Install Babylon and your agent's CLI first. Run the
+examples from **your project's directory**, replacing `$HOME/BABYLON-60` with
+Babylon's absolute source path. Keep the quotes for paths with spaces.
+Both examples preview the policy without launching the agent.
+
+**Codex:**
+
+```bash
+cd "$HOME/your-project"
+"$HOME/BABYLON-60/.venv/bin/babylon60" run --dry-run --preset codex -- codex
+```
+
+**Or Claude Code:**
+
+```bash
+cd "$HOME/your-project"
+"$HOME/BABYLON-60/.venv/bin/babylon60" run --dry-run --preset claude-code -- claude
+```
+
+Check `backend`, `policy_digest` and the allowed paths in the preview. To launch
+the agent, repeat your chosen command **without `--dry-run`**.
+
+Write access covers the workspace, private temporary directory and paths the
+preset grants for writing; Linux also allows `/dev/shm`. Other home-directory
+files are withheld unless granted. These actions need no broker signature.
+
+- Presets retain their agent's own credentials. `--pass-env NAME` explicitly
+  allows other credential-like environment variables.
+- `run` rejects the Babylon clone, your home or its ancestors, and shared
+  sticky directories such as `/tmp` as workspaces. Grants covering protected
+  credential paths are also rejected.
+- Recorded client checks cover confined `claude --version` and `codex --version`
+  on Linux x86_64. Full LLM sessions remain `NO_VERIFICADO`.
+
+`run --help` lists all options. [Grants and compatibility](docs/03_guides/README_REFERENCE.md#with-your-agent).
 
 ## Troubleshooting
 
@@ -190,6 +217,7 @@ complete Rust workspace. Links marked **↗** open the full repository online.
 | Installer asks for a clean checkout | Inspect `git status --short`. Keep your changes; install from a separate clean clone or extract the source ZIP into a new folder. |
 | `babylon60` is missing or shows old commands | Use `.venv/bin/babylon60` from the source root, or `.\.venv\Scripts\babylon60.exe` on Windows. The installer does not add it to PATH. |
 | `run` rejects the workspace | Use a dedicated project directory. The Babylon sources, your home root and shared temporary directories are rejected. See [workspace restrictions](#with-your-agent). |
+| Commands or `doctor` fail after moving the installation | Install into a new clean folder, then repeat setup and `doctor` there. The virtual environment and client registrations can retain the old path. |
 | Gemini lists MCP but disables it | Check the project's folder-trust setting in Gemini; listing alone does not establish a connection. See [client setup](#connect-a-client-optional). |
 | `verify.sh` reports a hash mismatch | The files and receipt disagree. Use the intact source matching the manifest, or regenerate evidence after testing your changes. Editing a hash is not a repair. |
 
@@ -236,22 +264,28 @@ The event ledger is distinct from the versioned CORTEX Memory adapter, which
 requires its own signed launch binding and native broker. Setup does not start
 that adapter. [Architecture and memory scope](docs/03_guides/README_REFERENCE.md#beyond-confinement).
 
+The ledger stores SQLite events with provenance supplied by the caller. It does
+not establish whether an event is an original source or a sound inference.
+
 ## What is verified
 
-[`CLAIMS.toml`](CLAIMS.toml) records per-claim status, scope and evidence
-levels. Formal models, software tests and physical hardware verification are
-different kinds of evidence. Demo results have their own recorded runs.
-From the source root, use a shell with Bash and `python3` available; the command
-below is not a native PowerShell command.
+**Identify the revision first.** In a Git checkout, record `git rev-parse HEAD`;
+for an extracted ZIP, read `commit` in `RELEASE_MANIFEST.json`. The manifest labels
+v5.1.0 as `candidate`; the Git tag predates `run`, `demo` and `log`.
+
+[`CLAIMS.toml`](CLAIMS.toml) records each claim's status, scope and evidence level.
+Formal models, software tests, hardware checks and demo runs have distinct scopes.
+From the source root, use **Bash with `python3`**; this is not a PowerShell command:
 
 ```bash
 bash verify.sh
 ```
 
-This checks the source tree, both README hashes, claims, SBOM and evidence
-against [`RELEASE_MANIFEST.json`](RELEASE_MANIFEST.json). It does **not** rerun
-the suites. Editing the sources invalidates the receipt; regeneration requires
-fresh tests on a clean source commit.
+**Check:** exit code 0 means the source tree, both README hashes, claims,
+dependency inventory (SBOM) and evidence passed their integrity checks against
+[`RELEASE_MANIFEST.json`](RELEASE_MANIFEST.json). This does **not** rerun the suites.
+Editing the sources invalidates the receipt; regeneration requires fresh tests
+on a clean source commit.
 
 A manifest marked `unsigned_local_evidence` with `signature: null` checks
 integrity but does not authenticate the publisher. CI badges apply to their
