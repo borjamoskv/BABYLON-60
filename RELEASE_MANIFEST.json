@@ -3,16 +3,16 @@
   "release": "5.1.0",
   "version": "5.1.0",
   "state": "candidate",
-  "commit": "6574bb8119d32985ae5704e2bbeb2115d7ebc0b9",
-  "source_tree_digest": "1b8eca9a115ecca885d54c2aed6df39a159877fc342651564181d02d3ff257cf",
+  "commit": "9be5f04d8d04f6a23f1f1695e723e61fa4df038e",
+  "source_tree_digest": "190212f8d4c0e1f4d2679ad379b5e7ac411905828ff538c2e649c3b91acddbf9",
   "axiom_root": "AX-0: No stochastic component may authorize its own irreversible effects (LLM != authority)",
   "claims_manifest_digest": "4fe991ad35b0451a32fd766f26269341e8695f9d631f95a6b3c8067d0d2110be",
-  "compiled_at_iso": "2026-11-25T17:21:48Z",
+  "compiled_at_iso": "2026-11-25T17:35:44Z",
   "prior_release": {
     "version": "5.1.0",
-    "commit": "6a38558b424e6e331da92b400beb9add2e47e8b9",
+    "commit": "6574bb8119d32985ae5704e2bbeb2115d7ebc0b9",
     "manifest_schema": "babylon60.release.v5",
-    "manifest_sha256": "2a62355263a7715fa787ed9ce75cb6232e91036c6eab1b6f060e5d972dc7ed37"
+    "manifest_sha256": "2ae3e9d608c936da81ac985da7b5326ca951c759ee58e26d0ff2e5bc819b54a7"
   },
   "version_sync": {
     "babylon_toml": "5.1.0",
@@ -80,8 +80,8 @@
     "pyproject.toml": "7d81f06ffeaea76ec484884b2ac38f0d98c760c8a25779754d17a5e5c6065d05",
     "uv.lock": "33d5aeb7c03eb8799d6fa444ff957677fa596830ab34c6a13c4353e4ea5f798d",
     "LICENSE": "4c0feb0f48586176789f42815859e2714a0486cccc72fbc9e3422eb29d155536",
-    "README.md": "b688b930557c29c13eb5fab7c7f497e46e9f1a1f7d63ad1c3351137ee3d1b938",
-    "README_ES.md": "d2c4033407664251ec11fcaa7637b88986a84674167713b8d3b40788e754f8c5",
+    "README.md": "d2fcc786a84a766979edf0467003977340150e9c5be1dd0306a896f24c861bdc",
+    "README_ES.md": "0e03c07c0f3f9f4aae65ee5967e9c4b78cc5db0769c0dece935446e6601c5540",
     "WHY_BABYLON_60.md": "d3f522dfb1f7fc11ca77847c82c935988b63d0131c9e8ff47ba8369a84e380d5"
   },
   "claims": {
@@ -101,7 +101,7 @@
   },
   "release_bundle": {
     "name": "Babylon60-v5.1.0-terminal-mcp.zip",
-    "tree_digest": "a8cb2d36bedb09418f1f4f4b058b94f6799df902092a432001b75266cc7a0e4b",
+    "tree_digest": "cd0f95747bcf8ecfa6e89bfa6804a653e475b808766cfb433959598cc498c9c0",
     "source_files": [
       ".agents/skills/_skill_checks/declarative.py",
       ".agents/skills/_skill_router.py",
