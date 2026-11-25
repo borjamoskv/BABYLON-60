@@ -420,3 +420,43 @@ def test_exported_pack_preserves_pending_evaluation_and_content_digest() -> None
             assert item["test_execution_status"] == "NOT_EXECUTED_BY_EXPORTER"
             assert item["result"] == "NOT_EVALUATED"
             assert item["pending_evaluation"] is True
+
+
+
+def test_fresh_source_claims_export_matches_canonical_toml(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Generate a new, unsigned export without changing a tracked historical receipt."""
+    import sys
+    import tomllib
+
+    gen_mod = _load_tool_module("tools/generate_compliance_audit_pack.py", "audit_pack_fresh_gen_mod")
+    output = tmp_path / "compliance-pack.json"
+    monkeypatch.setattr(sys, "argv", ["generate_compliance_audit_pack.py", "--output", str(output)])
+    gen_mod.main()
+
+    raw = (REPO_ROOT / "CLAIMS.toml").read_bytes()
+    claims = tomllib.loads(raw.decode("utf-8"))["claim"]
+    report = json.loads(output.read_text(encoding="utf-8"))
+    assert report.pop("report_sha256") == hashlib.sha256(
+        json.dumps(report, indent=2, ensure_ascii=False).encode("utf-8")
+    ).hexdigest()
+    assert report["source_claims_sha256"] == hashlib.sha256(raw).hexdigest()
+    assert report["publication_authorized"] is False
+    assert report["legal_conformity"] == "NOT_DETERMINED"
+    assert report["attestation"]["hardware_attestation_verified"] is False
+    items = [item for section in report["sections"] for item in section["claims_evidence"]]
+    assert len(items) == 8
+    for item in items:
+        claim = claims[item["claim_id"]]
+        assert item["statement"] == claim["statement"]
+        assert item["source_claim_status"] == claim["status"]
+        assert item["scope"] == claim.get("scope", "Requires definition")
+        assert item["result"] == "NOT_EVALUATED"
+        assert item["test_execution_status"] == "NOT_EXECUTED_BY_EXPORTER"
+    original_bytes = output.read_bytes()
+    with pytest.raises(FileExistsError):
+        gen_mod.main()
+    assert output.read_bytes() == original_bytes
+    descriptions = " ".join(section["silicon_solution"] for section in report["sections"])
+    assert "RFC 9942 conformance is not implemented" in descriptions
+    assert "RFO=0" not in descriptions
+    assert "do not establish hardware-backed human oversight" in descriptions

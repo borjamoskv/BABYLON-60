@@ -5,18 +5,13 @@ Author: Borja Fernández Angulo (borjamoskv)
 Standard: C5-REAL Sovereign Trust Substrate
 """
 
+import argparse
 import os
 import json
 import hashlib
 import datetime
 
-try:
-    import tomllib
-except ModuleNotFoundError:
-    try:
-        import tomli as tomllib
-    except ModuleNotFoundError:
-        tomllib = None
+import tomllib
 
 def get_silicon_attestation():
     uname = os.uname()
@@ -33,43 +28,27 @@ def get_silicon_attestation():
     }
 
 def parse_claims(claims_path):
-    if not os.path.exists(claims_path):
-        return {"error": f"CLAIMS.toml not found at {claims_path}"}
-    
-    with open(claims_path, "r", encoding="utf-8") as f:
-        content = f.read()
-
-    claims = {}
-    current_claim = None
-    for line in content.splitlines():
-        line = line.strip()
-        if line.startswith("[claim.") and line.endswith("]"):
-            current_claim = line[7:-1]
-            claims[current_claim] = {}
-        elif current_claim and "=" in line and not line.startswith("#"):
-            k, v = line.split("=", 1)
-            k = k.strip()
-            v = v.strip().strip('"').strip("'")
-            claims[current_claim][k] = v
-    return claims
+    """Read canonical TOML without leaking fields across table boundaries."""
+    with open(claims_path, "rb") as source:
+        return tomllib.load(source)["claim"]
 
 def generate_compliance_report(claims):
     # Mapping to European Union AI Act (Regulation EU 2024/1689)
     mapping = {
         "Article 12: Record-Keeping & Automatic Logging": {
-            "mandate": "High-risk and autonomous AI systems must technically enable automatic recording of events (logs) throughout lifecycle, ensuring tamper-evident traceability.",
+            "mandate": "High-risk AI systems must technically allow automatic recording of events over their lifetime; applicability and conformity require a separate assessment.",
             "claims": ["cose_ed25519_receipt", "cortex_persist_sqlite", "merkle_attestation"],
-            "silicon_solution": "RFC 9942 COSE_Sign1 cryptographic receipts per action dispatch + WORM SQLite WAL with SHA3-256 hash chaining."
+            "silicon_solution": "Candidate technical contributions: COSE_Sign1 halt receipts, SQLite ledger and Merkle evidence. Read the mapped claims for evidence scope; RFC 9942 conformance is not implemented."
         },
         "Article 14: Human Oversight & Capability Invariants": {
             "mandate": "Natural persons must be enabled to oversee the AI system, prevent or minimize risks, and exercise an effective stop mechanism.",
             "claims": ["secure_enclave_p256", "inv_01_manifest_layout"],
-            "silicon_solution": "Apple Secure Enclave P-256 biometric friction (Touch ID with zero reuse duration) for irreversible side-effects + 64-byte SharedManifest gate."
+            "silicon_solution": "Candidate technical contributions: P-256 signature verification and SharedManifest layout. Software tests do not establish hardware-backed human oversight."
         },
         "Article 15: Accuracy, Robustness & Cybersecurity": {
             "mandate": "AI systems must achieve an appropriate level of accuracy, robustness, fail-safe operation, and resilience against adversarial inputs or hallucinations.",
             "claims": ["inv_04_fail_stop_halt", "inv_02_seqlock_concurrency", "lean4_formal_trace"],
-            "silicon_solution": "Deterministic apoptosis (0xDEAD_6060 / Fail-Stop) on capability taint + Seqlock SPMC (RFO=0) + Lean 4 machine-checked trace induction."
+            "silicon_solution": "Candidate technical contributions: admission-state and halt evidence, bounded seqlock model checking, and abstract Lean trace results. These do not establish universal runtime or hardware guarantees."
         }
     }
 
@@ -131,21 +110,26 @@ def generate_compliance_report(claims):
 
 def main():
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    parser = argparse.ArgumentParser(description="Export source claims; not a conformity assessment.")
+    parser.add_argument("--output", default=os.path.join(repo_root, "reports", "eu_ai_act_compliance_pack.json"))
+    args = parser.parse_args()
     claims_file = os.path.join(repo_root, "CLAIMS.toml")
 
-    claims = parse_claims(claims_file)
+    with open(claims_file, "rb") as source:
+        claims_bytes = source.read()
+    claims = tomllib.loads(claims_bytes.decode("utf-8"))["claim"]
     report = generate_compliance_report(claims)
+    report["source_claims_sha256"] = hashlib.sha256(claims_bytes).hexdigest()
 
     report_bytes = json.dumps(report, indent=2, ensure_ascii=False).encode("utf-8")
     report_hash = hashlib.sha256(report_bytes).hexdigest()
     report["report_sha256"] = report_hash
 
-    # Save artifact in tracked reports/ directory
-    out_dir = os.path.join(repo_root, "reports")
-    os.makedirs(out_dir, exist_ok=True)
-    out_path = os.path.join(out_dir, "eu_ai_act_compliance_pack.json")
+    # Use --output outside the checkout to preserve historical receipts.
+    out_path = os.path.abspath(args.output)
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
 
-    with open(out_path, "w", encoding="utf-8") as f:
+    with open(out_path, "x", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
@@ -154,7 +138,7 @@ def main():
     print("=" * 72)
     print("Target:      Regulation (EU) 2024/1689 (Articles 12, 14, 15)")
     print(f"Verdict:     {report['summary']['verdict']}")
-    print(f"Evidence:    {report['summary']['evidence_collection_ratio']} ({report['summary']['testable_points']}/{report['summary']['total_evidence_points']} Claims Ready for Audit)")
+    print(f"Evidence:    {report['summary']['evidence_collection_ratio']} ({report['summary']['testable_points']}/{report['summary']['total_evidence_points']} Declared source evidence points)")
     print(f"Digest:      sha256:{report_hash}")
     print(f"Pack Path:   {out_path}")
     print("=" * 72)
