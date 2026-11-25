@@ -1,0 +1,363 @@
+{
+  "date": "2026-10-26",
+  "status": "bounded_checks_passed",
+  "scope": "Nomenclature, compatible CLI option and unchanged proof/error protocol on synthetic isolated fixtures",
+  "preferred_option": "--lean-only",
+  "legacy_alias": "--jit-only",
+  "output_prefix": "[LEAN_CHECK]",
+  "alias_output_identical": true,
+  "rust_change_limited_to_labels_and_cli_alias": true,
+  "tests": {
+    "process_cli_csv": 13,
+    "real_lean_explicit": 1,
+    "total": 14,
+    "real_lean_cases": [
+      "nominal true",
+      "negative false",
+      "incompatible expectation is error",
+      "invalid import is error",
+      "invalid syntax is error"
+    ]
+  },
+  "checks": {
+    "rust-check": {
+      "command": [
+        "cargo",
+        "check",
+        "-q",
+        "--locked",
+        "-p",
+        "b60-lang",
+        "--features",
+        "stress-bins",
+        "--bin",
+        "fsm_poc",
+        "--bin",
+        "fsm_stress"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "rust-tests": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "b60-lang",
+        "--features",
+        "stress-bins",
+        "--bin",
+        "fsm_poc",
+        "--bin",
+        "fsm_stress",
+        "--test",
+        "lean_harness"
+      ],
+      "exit_code": 0,
+      "stdout": "\nrunning 1 test\ntest tests::csv_oracle_distinguishes_model_verdicts_from_execution_errors ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.24s\n\n\nrunning 0 tests\n\ntest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n\n\nrunning 13 tests\ntest real_lean_proves_both_verdicts_and_rejects_a_wrong_expectation ... ignored, requires the project-pinned Lake toolchain and built BabylonTrace import\ntest a_missing_program_is_a_spawn_error ... ok\ntest captures_both_streams_beyond_pipe_capacity ... ok\ntest a_signal_is_an_execution_error_even_after_a_rejection_marker ... ok\ntest both_clis_reject_invalid_arguments_before_invoking_lean ... ok\ntest accepts_only_the_single_expected_marker_for_each_verdict ... ok\ntest emits_the_expected_theorem_in_a_temporary_source_and_removes_it ... ok\ntest timeout_terminates_the_process_group_including_a_descendant ... ok\ntest nonzero_exit_is_an_error_even_after_the_expected_marker ... ok\ntest both_clis_require_the_nominal_control_before_the_negative_control ... ok\ntest stderr_and_compiler_errors_cannot_count_as_a_semantic_rejection ... ok\ntest missing_duplicate_conflicting_and_extra_output_are_errors ... ok\ntest both_clis_fail_globally_on_nominal_negative_or_wrong_verdict_errors ... ok\n\ntest result: ok. 12 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 8.11s\n\n",
+      "stderr": "   Compiling b60-lang v5.0.1 (<repo>/crates/b60-lang)\n    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.02s\n     Running unittests src/bin/fsm_poc.rs (target/debug/deps/fsm_poc-9aa1d0c73f7a2d42)\n     Running unittests src/bin/fsm_stress.rs (target/debug/deps/fsm_stress-b393391fd59fe8f8)\n     Running tests/lean_harness.rs (target/debug/deps/lean_harness-2e380448adc5067b)\n"
+    },
+    "real-lean-test": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "b60-lang",
+        "--features",
+        "stress-bins",
+        "--test",
+        "lean_harness",
+        "real_lean",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "stdout": "\nrunning 1 test\ntest real_lean_proves_both_verdicts_and_rejects_a_wrong_expectation ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 12 filtered out; finished in 11.69s\n\n",
+      "stderr": "    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.09s\n     Running tests/lean_harness.rs (target/debug/deps/lean_harness-2e380448adc5067b)\n"
+    },
+    "lean-only-cli": {
+      "command": [
+        "cargo",
+        "run",
+        "-q",
+        "--locked",
+        "-p",
+        "b60-lang",
+        "--features",
+        "stress-bins",
+        "--bin",
+        "fsm_poc",
+        "--",
+        "--lean-only"
+      ],
+      "exit_code": 0,
+      "stdout": "[LEAN_CHECK] Nominal trace: Lean proved validateTrace = true (3 events).\n[LEAN_CHECK] Negative trace: Lean proved validateTrace = false (3 events).\n",
+      "stderr": ""
+    },
+    "legacy-alias-cli": {
+      "command": [
+        "cargo",
+        "run",
+        "-q",
+        "--locked",
+        "-p",
+        "b60-lang",
+        "--features",
+        "stress-bins",
+        "--bin",
+        "fsm_poc",
+        "--",
+        "--jit-only"
+      ],
+      "exit_code": 0,
+      "stdout": "[LEAN_CHECK] Nominal trace: Lean proved validateTrace = true (3 events).\n[LEAN_CHECK] Negative trace: Lean proved validateTrace = false (3 events).\n",
+      "stderr": ""
+    },
+    "stress-quick-cli": {
+      "command": [
+        "cargo",
+        "run",
+        "-q",
+        "--locked",
+        "-p",
+        "b60-lang",
+        "--features",
+        "stress-bins",
+        "--bin",
+        "fsm_stress",
+        "--",
+        "--quick"
+      ],
+      "exit_code": 0,
+      "stdout": "[LEAN_CHECK] Synthetic trace checks against BabylonTrace; timings are local observations.\n[LEAN_CHECK] Proved true: 30 events | emit 0.0002s | Lean 1.0357s\n[LEAN_CHECK] Proved false: 31 events | Lean 1.2392s\n",
+      "stderr": ""
+    },
+    "rust-format": {
+      "command": [
+        "rustfmt",
+        "--check",
+        "--edition",
+        "2021",
+        "--config",
+        "skip_children=true",
+        "crates/b60-lang/src/bin/fsm_poc.rs",
+        "crates/b60-lang/src/bin/fsm_stress.rs",
+        "crates/b60-lang/tests/lean_harness.rs"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "semantic-contracts": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_semantic_contracts.py",
+        "--workspace-only"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS: known semantic patterns (62 documents, 41 Python files), local links/anchors in 15 governance documents; not a proof of semantic consistency or runtime.\n",
+      "stderr": ""
+    },
+    "token-budget": {
+      "command": [
+        "python3",
+        "scripts/c5_quality_gates/audit_token_budget.py",
+        "--workspace-only",
+        "--skip-ghost-listeners"
+      ],
+      "exit_code": 0,
+      "stdout": "=== [C5-REAL] AUDITORÍA DE PRESUPUESTO DE TOKENS ===\n■ .babylon60rules (workspace, counted once): 5,082 B (~1,270 estimated tokens)\n■ AGENTS.md (workspace, counted once): 4,808 B (~1,202 estimated tokens)\n■ Global rules: NOT_CHECKED (workspace-only)\n■ Reglas always_on (Global: 0, Workspace: 0): 0 B (~0 estimated tokens)\n■ INSPECTED ALWAYS_ON: 9,890 B / 40,000 B (~2,472 estimated tokens; actual client context not measured)\n■ Reglas condicionales (model_decision): 0 global + 7 workspace (bodies excluded from this budget; client loading not measured)\n■ Ghost Listeners (conversation_summaries.db): NOT_CHECKED (explicitly skipped)\nPASS: Workspace token budget within inline ceiling; global rules and cross-scope duplicates not checked.\n",
+      "stderr": ""
+    },
+    "active-topology": {
+      "command": [
+        "python3",
+        "scripts/guards/verify_active_topology.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS: instruction files, required direct symlinks and MCP registration references (worktree; VS Code if present)\n",
+      "stderr": ""
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "crates/b60-lang/src/bin/fsm_poc.rs",
+        "crates/b60-lang/src/bin/fsm_stress.rs",
+        "docs/00_index.md",
+        "docs/06_theory/00_index.md",
+        "docs/README.md"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "preservation": {
+    "Cargo.lock": {
+      "unchanged": true,
+      "sha256": "7c772f6e6ffd29594c5b9bdadb004be09c57af67b60b7be1b56c034a174491b4"
+    },
+    "crates/b60-lang/Cargo.toml": {
+      "unchanged": true,
+      "sha256": "a79063dea3f221cd890a94601e0f8025e2f0757122f69b6ba11591d6e1eca95d"
+    },
+    "proof/lean/lakefile.toml": {
+      "unchanged": true,
+      "sha256": "99c1cf005aac1e3793aaba1ea1775d8e4d6c3e94b2f1dbd9b08723b2283aa631"
+    },
+    "proof/lean/lake-manifest.json": {
+      "unchanged": true,
+      "sha256": "9325276f014362af0d80077ed4126abdec7dc79d64bf576708cc542b155220fa"
+    },
+    "proof/lean/lean-toolchain": {
+      "unchanged": true,
+      "sha256": "108ca2895820de2c74101f81de81756b41ca0165dfdc8ced16a82c3f810152d0"
+    },
+    "crates/b60-lang/src/bin/support/lean_harness.rs": {
+      "unchanged": true,
+      "sha256": "0742b61c2bd2987894f6d67f7054d020d011491c3c75e672bacffeba24488359"
+    },
+    "proof/lean/C5PortHamiltonian.lean": {
+      "unchanged": true,
+      "sha256": "47af8878686bd3dbeff1d7c3e2d002d8e32183296b7a49401299e799973872fc"
+    },
+    "proof/lean/Babylon.lean": {
+      "unchanged": true,
+      "sha256": "909bdb5bcd6c8f2ee8e93d5ed97949419c7d8fa772c42e6d6d049fdfa574606e"
+    },
+    "proof/lean/AcsEnvelope.lean": {
+      "unchanged": true,
+      "sha256": "3bbc1baa9f4fc94ddb50573bf83c097dde8dabd407b18ef36b4c6b86f0cfd008"
+    },
+    "proof/lean/BabylonAeonStress.lean": {
+      "unchanged": true,
+      "sha256": "3ccd72bb384f92cc8af895bc8c4503c5ad86dbf3544861340e866d98c0b8eef0"
+    },
+    "proof/lean/CanonicalHead.lean": {
+      "unchanged": true,
+      "sha256": "95274337d3b41d604e95d2fc50f0ae4a68856c05d4ac641aa1a21dd54f7408c1"
+    },
+    "proof/lean/BabylonAOTOracle.lean": {
+      "unchanged": true,
+      "sha256": "2fa25bdbd878bbd13cc722a463a4f59c00b3419225d8f4d2150aac565353cd20"
+    },
+    "proof/lean/BabylonAutoTrace.lean": {
+      "unchanged": true,
+      "sha256": "4d38fe24b1f65835473812a1b8099de49a793fbc42ce1ce96daaa501f87a651d"
+    },
+    "proof/lean/MolochLandauer.lean": {
+      "unchanged": true,
+      "sha256": "b050072b0cfe8763c58bfeb0e5e66a5d54839e0b97743955ecd2fb2d0a93f60e"
+    },
+    "proof/lean/C5Affine.lean": {
+      "unchanged": true,
+      "sha256": "22d65535f432825ba16a4baa1258a25da9689b72197fbd93fb33381785add050"
+    },
+    "proof/lean/TicketEnvelope.lean": {
+      "unchanged": true,
+      "sha256": "55f2630ed20779f226c22ffa1bf772f5901c7f1d65ff864b4c7609c0b6e6b096"
+    },
+    "proof/lean/NavierStokesBKM.lean": {
+      "unchanged": true,
+      "sha256": "353d51830eacf849875964e376ee27f6e222b3b2626a998cf972f88ae1db910b"
+    },
+    "proof/lean/BabylonStressTrace.lean": {
+      "unchanged": true,
+      "sha256": "f19d80ec05dda8cfc4858b778f2a9b6869055a7fb322681f6eecdaf8ce97252b"
+    },
+    "proof/lean/BabylonOracle.lean": {
+      "unchanged": true,
+      "sha256": "496f397b0f9e43a3b59c2480b737372062d3349fdeee775e6328f863f5692750"
+    },
+    "proof/lean/NavierStokesOracle.lean": {
+      "unchanged": true,
+      "sha256": "753edd7466ee342ed0d20999855c3ffe26ab7014482d1c38f5a855b0d8d3ffbc"
+    },
+    "proof/lean/NemesisWave4.lean": {
+      "unchanged": true,
+      "sha256": "78ac71a9f718b05d5c1d6a936b1d317f2a3b94aa9ed4f9d1a307ab5317da8a0f"
+    },
+    "proof/lean/Destiladora_838c463da193b48f.lean": {
+      "unchanged": true,
+      "sha256": "5a32a31bd6f8932b27a5b2481d2d3800990f41ae5653575f624c785d44bb0b03"
+    },
+    "proof/lean/CanonicalEnvelope.lean": {
+      "unchanged": true,
+      "sha256": "e5d66ba2214af13aa5ad8eaea4b9eae7f79ea95661f0639350b0f91932fb09c9"
+    },
+    "proof/lean/AX0.lean": {
+      "unchanged": true,
+      "sha256": "ff038f17b706f18c3fba64e1e907e34e5efa3b578fc02d98f08b1013cce77fd0"
+    },
+    "proof/lean/BabylonStressCorrupt.lean": {
+      "unchanged": true,
+      "sha256": "4a1f254a48998625538f972a1a88aeff14381aea9d7bd63029d2e9ab3f3c4ff3"
+    },
+    "proof/lean/BabylonTrace.lean": {
+      "unchanged": true,
+      "sha256": "83b00a15497eaf2d2362fda7dfa6ce8090c59435dfede6ecb7fac54ad18c76ba"
+    },
+    "proof/lean/NavierStokesSobolevKato.lean": {
+      "unchanged": true,
+      "sha256": "f744326608118898f44ece1ea7c9c0546233066dac20a05d83d4fd7e7d04d208"
+    },
+    "proof/lean/BabylonAeonChain.lean": {
+      "unchanged": true,
+      "sha256": "233b3e079981dbcc75850dbfdfbacbb5151af2e15f49289391494cf61e31370e"
+    },
+    "proof/lean/HolographicPoC.lean": {
+      "unchanged": true,
+      "sha256": "d51f82f9967190657371ee7d43188dc140c6871b7c3680822599bd8cb595af72"
+    },
+    "docs/06_theory/evidence/lean-scope-20261025.json": {
+      "unchanged": true,
+      "sha256": "d69b85b123e211928c100cc2f16f193702ad7a1e0385f3961473df2bc45a1806"
+    },
+    "docs/06_theory/evidence/lean-reporting-20261026.json": {
+      "unchanged": true,
+      "sha256": "28b6041bd363afe77a4db4136a01ad5ea15cec73b098670bedfeb8725061d52c"
+    },
+    "docs/06_theory/evidence/lean-harness-20261026.json": {
+      "unchanged": true,
+      "sha256": "ac7f462b8cc7a9bae8511bef7e0a04c6680cf47883a29d09d3f42ae74c25dfc2"
+    }
+  },
+  "source_sha256": {
+    "crates/b60-lang/src/bin/fsm_poc.rs": "ec8e7250c972599dffe89b0ab174fe19663612c71a58ce95fa25ff44b34743c9",
+    "crates/b60-lang/src/bin/fsm_stress.rs": "b0901878bb1f090f85d157e630f6662cf98600f7d891012d02da38487f26d5b2",
+    "crates/b60-lang/src/bin/support/lean_harness.rs": "0742b61c2bd2987894f6d67f7054d020d011491c3c75e672bacffeba24488359",
+    "crates/b60-lang/tests/lean_harness.rs": "15a6ab7abc3aad7211ac268436cfaec2c2f69a0a437d1d5a3c8377290a891f98"
+  },
+  "documentation": {
+    "local_links_checked": 63,
+    "failures": [],
+    "indices": {
+      "docs/06_theory/00_index.md": {
+        "documents": 30,
+        "missing": []
+      },
+      "docs/00_index.md": {
+        "documents": 30,
+        "missing": []
+      },
+      "docs/README.md": {
+        "documents": 30,
+        "missing": []
+      }
+    }
+  },
+  "historical_evidence": "Earlier JSON records retained byte for byte, including observed JIT labels and source hashes for that iteration.",
+  "limits": [
+    "No demonstration of production hot-path integration or timing",
+    "No Rust concurrency/memory equivalence proof",
+    "Default massive AOT and full stress runs not executed",
+    "No package/lockfile changes",
+    "Global rules, ghost-listener telemetry, CI status and protected runtime not checked"
+  ]
+}

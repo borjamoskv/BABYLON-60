@@ -1,0 +1,263 @@
+version: 1
+benchmark_version: v1.2.2
+# Written and sealed before inspecting any AgentDojo injection_tasks.
+# Effect kinds map to babylon60::ontology::babylon::EffectKind.
+suites:
+  workspace:
+    add_calendar_event_participants:
+      kind: write
+      effect: FsMutate
+      rationale: Mutates calendar event participant list.
+    append_to_file:
+      kind: write
+      effect: FsMutate
+      rationale: Appends content to a cloud drive file.
+    cancel_calendar_event:
+      kind: write
+      effect: FsDelete
+      rationale: Cancels calendar event and notifies attendees.
+    create_calendar_event:
+      kind: write
+      effect: FsMutate
+      rationale: Creates calendar event and sends invitations.
+    create_file:
+      kind: write
+      effect: FsMutate
+      rationale: Creates a new file in cloud drive.
+    delete_email:
+      kind: write
+      effect: FsDelete
+      rationale: Deletes email from inbox.
+    delete_file:
+      kind: write
+      effect: FsDelete
+      rationale: Deletes file from cloud drive.
+    get_current_day:
+      kind: read
+      rationale: Pure read of current simulated date.
+    get_day_calendar_events:
+      kind: read
+      rationale: Pure read of calendar events for a day.
+    get_draft_emails:
+      kind: read
+      rationale: Pure read of draft emails.
+    get_file_by_id:
+      kind: read
+      rationale: Pure read of a cloud drive file by id.
+    get_received_emails:
+      kind: read
+      rationale: Pure read of received emails.
+    get_sent_emails:
+      kind: read
+      rationale: Pure read of sent emails.
+    get_unread_emails:
+      kind: write
+      effect: FsMutate
+      rationale: Marks returned unread emails as read in inbox state.
+    list_files:
+      kind: read
+      rationale: Pure read listing cloud drive files.
+    reschedule_calendar_event:
+      kind: write
+      effect: FsMutate
+      rationale: Mutates event schedule and notifies attendees.
+    search_calendar_events:
+      kind: read
+      rationale: Pure read searching calendar events.
+    search_contacts_by_email:
+      kind: read
+      rationale: Pure read searching contacts by email.
+    search_contacts_by_name:
+      kind: read
+      rationale: Pure read searching contacts by name.
+    search_emails:
+      kind: read
+      rationale: Pure read searching emails.
+    search_files:
+      kind: read
+      rationale: Pure read searching cloud drive files by content.
+    search_files_by_filename:
+      kind: read
+      rationale: Pure read searching cloud drive files by filename.
+    send_email:
+      kind: write
+      effect: NetTransmit
+      rationale: Sends outbound email message.
+    share_file:
+      kind: write
+      effect: FsChmod
+      rationale: Modifies sharing permissions on a cloud drive file.
+
+  travel:
+    cancel_calendar_event:
+      kind: write
+      effect: FsDelete
+      rationale: Cancels calendar event and notifies attendees.
+    check_restaurant_opening_hours:
+      kind: read
+      rationale: Pure read of restaurant opening hours.
+    create_calendar_event:
+      kind: write
+      effect: FsMutate
+      rationale: Creates calendar event and notifies participants.
+    get_all_car_rental_companies_in_city:
+      kind: read
+      rationale: Pure read listing car rental companies.
+    get_all_hotels_in_city:
+      kind: read
+      rationale: Pure read listing hotels in a city.
+    get_all_restaurants_in_city:
+      kind: read
+      rationale: Pure read listing restaurants in a city.
+    get_car_fuel_options:
+      kind: read
+      rationale: Pure read of car rental fuel options.
+    get_car_price_per_day:
+      kind: read
+      rationale: Pure read of car rental daily prices.
+    get_car_rental_address:
+      kind: read
+      rationale: Pure read of car rental addresses.
+    get_car_types_available:
+      kind: read
+      rationale: Pure read of car types.
+    get_contact_information_for_restaurants:
+      kind: read
+      rationale: Pure read of restaurant contacts.
+    get_cuisine_type_for_restaurants:
+      kind: read
+      rationale: Pure read of restaurant cuisine types.
+    get_day_calendar_events:
+      kind: read
+      rationale: Pure read of calendar events for a day.
+    get_dietary_restrictions_for_all_restaurants:
+      kind: read
+      rationale: Pure read of dietary options.
+    get_flight_information:
+      kind: read
+      rationale: Pure read of flight listings.
+    get_hotels_address:
+      kind: read
+      rationale: Pure read of hotel address.
+    get_hotels_prices:
+      kind: read
+      rationale: Pure read of hotel price ranges.
+    get_price_for_restaurants:
+      kind: read
+      rationale: Pure read of restaurant prices.
+    get_rating_reviews_for_car_rental:
+      kind: read
+      rationale: Pure read of car rental reviews.
+    get_rating_reviews_for_hotels:
+      kind: read
+      rationale: Pure read of hotel reviews.
+    get_rating_reviews_for_restaurants:
+      kind: read
+      rationale: Pure read of restaurant reviews.
+    get_restaurants_address:
+      kind: read
+      rationale: Pure read of restaurant addresses.
+    get_user_information:
+      kind: read
+      rationale: Pure read of user profile attributes.
+    reserve_car_rental:
+      kind: write
+      effect: NetTransmit
+      rationale: Submits car reservation with user phone number.
+    reserve_hotel:
+      kind: write
+      effect: NetTransmit
+      rationale: Submits hotel reservation with user phone number.
+    reserve_restaurant:
+      kind: write
+      effect: NetTransmit
+      rationale: Submits restaurant reservation with user phone number.
+    search_calendar_events:
+      kind: read
+      rationale: Pure read searching calendar events.
+    send_email:
+      kind: write
+      effect: NetTransmit
+      rationale: Sends outbound email message.
+
+  banking:
+    get_balance:
+      kind: read
+      rationale: Pure read of account balance.
+    get_iban:
+      kind: read
+      rationale: Pure read of account IBAN.
+    get_most_recent_transactions:
+      kind: read
+      rationale: Pure read of transaction history.
+    get_scheduled_transactions:
+      kind: read
+      rationale: Pure read of scheduled transactions.
+    get_user_info:
+      kind: read
+      rationale: Pure read of user profile fields.
+    read_file:
+      kind: read
+      rationale: Pure read of simulated local file.
+    schedule_transaction:
+      kind: write
+      effect: NetTransmit
+      rationale: Schedules future bank transfer.
+    send_money:
+      kind: write
+      effect: NetTransmit
+      rationale: Executes immediate bank transfer.
+    update_password:
+      kind: write
+      effect: FsChmod
+      rationale: Rotates bank account password credential.
+    update_scheduled_transaction:
+      kind: write
+      effect: FsMutate
+      rationale: Modifies an existing scheduled transaction.
+    update_user_info:
+      kind: write
+      effect: FsMutate
+      rationale: Mutates bank user profile fields.
+
+  slack:
+    add_user_to_channel:
+      kind: write
+      effect: FsChmod
+      rationale: Grants user membership in Slack channel.
+    get_channels:
+      kind: read
+      rationale: Pure read listing Slack channels.
+    get_users_in_channel:
+      kind: read
+      rationale: Pure read listing channel members.
+    get_webpage:
+      kind: write
+      effect: NetTransmit
+      rationale: Records outbound HTTP URL request (exfiltration vector).
+    invite_user_to_slack:
+      kind: write
+      effect: FsChmod
+      rationale: Adds user account to Slack workspace.
+    post_webpage:
+      kind: write
+      effect: NetTransmit
+      rationale: Publishes webpage content to external URL.
+    read_channel_messages:
+      kind: read
+      rationale: Pure read of channel messages.
+    read_inbox:
+      kind: read
+      rationale: Pure read of user direct inbox.
+    remove_user_from_slack:
+      kind: write
+      effect: FsDelete
+      rationale: Removes user and deletes user inbox/channel state.
+    send_channel_message:
+      kind: write
+      effect: NetTransmit
+      rationale: Transmits message to Slack channel.
+    send_direct_message:
+      kind: write
+      effect: NetTransmit
+      rationale: Transmits direct message to Slack user.

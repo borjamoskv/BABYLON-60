@@ -1,0 +1,398 @@
+{
+  "schema_version": "1.1.0",
+  "canonical_aliases": ["S0.VAULT", "S1.PULSE", "S2.PILOT", "S2.FORGE", "S2.ARCHIVE", "S3.APEX"],
+  "description": "Declarative host and fleet capability profiles for C5-UNIVERSAL-AUTOROUTE v3.0. Decouples model labels from core routing logic.",
+  "selector_compatibility": {
+    "model_patterns": {
+      "kinetic_weights": "\\b(flash|haiku|mini|nano|lite|instant|hydrogen)\\b",
+      "high_default_mode": "\\b(opus|o1|o3|ultra|deep|carbon)\\b",
+      "apex_orchestrator": "carbon",
+      "non_kinetic_weights": "\\b(opus|carbon|argon|sonnet|o1|o3)\\b",
+      "apex_weights": "\\b(opus|o1|o3|ultra|carbon)\\b|deep-research",
+      "dynamic_thinking_option": "argon|carbon"
+    },
+    "families": [
+      {
+        "pattern": "127\\.0\\.0\\.1|localhost|litert|ollama|vllm|llama\\.cpp|local://",
+        "family": "local-loopback", "locality": "loopback", "cache_discount": 1.0
+      },
+      {
+        "pattern": "gpt-oss",
+        "family": "gpt-oss", "locality": "remote", "cache_discount": 0.0
+      },
+      {
+        "pattern": "carbon|argon|hydrogen|gemini-4|gemini 4|orchestrator",
+        "family": "gemini-4", "locality": "remote", "cache_discount": 0.95
+      },
+      {
+        "pattern": "gemini",
+        "family": "gemini-3.8", "locality": "remote", "cache_discount": 0.75
+      },
+      {
+        "pattern": "claude|opus|sonnet|haiku",
+        "family": "claude", "locality": "remote", "cache_discount": 0.95
+      },
+      {
+        "pattern": "gpt-|o1|o3|codex",
+        "family": "openai", "locality": "remote", "cache_discount": 0.75
+      }
+    ],
+    "dynamic_thinking_families": ["gemini-4"],
+    "legacy_recommendations": {
+      "antigravity_ui": {
+        "triage": [
+          { "label": "Gemini 3.8 Flash", "effort": "High (Fast)" },
+          { "label": "Orchestrator (Argon)" }
+        ],
+        "resting": [{ "label": "Orchestrator (Argon)" }],
+        "apex": [{ "label": "Orchestrator (Carbon)" }],
+        "formal_ring0": [
+          { "label": "Claude Opus 5.5", "effort": "High" },
+          { "label": "Orchestrator (Carbon)" }
+        ]
+      }
+    }
+  },
+  "profiles": {
+    "antigravity_ui": {
+      "host_kind": "ide_selector",
+      "resting_default": "Orchestrator (Argon)",
+      "resting_alias": "S2.PILOT",
+      "role_bindings": {
+        "S0.VAULT": { "delegate_profile": "local_loopback" },
+        "S1.PULSE": { "target_label": "Gemini 3.8 Flash", "default_effort": "High (Fast)" },
+        "S2.PILOT": { "target_label": "Orchestrator (Argon)", "default_effort": "adaptive" },
+        "S2.FORGE": { "target_label": "Gemini 4 Argon", "default_effort": "Low" },
+        "S2.ARCHIVE": { "target_label": "Gemini 4 Argon", "default_effort": "Medium" },
+        "S3.APEX": { "target_label": "Orchestrator (Carbon)", "default_effort": "adaptive", "domain_overrides": { "formal_ring0": "Claude Opus 5.5" } }
+      },
+      "how_to_apply": "Selector de modelo en la barra inferior de Antigravity IDE",
+      "options": [
+        {
+          "label": "Orchestrator (Argon)",
+          "aliases": ["S1.PULSE", "S2.PILOT"],
+          "family": "gemini-4",
+          "stratum": 2,
+          "effort": "adaptive",
+          "adaptive_strata": [1, 2],
+          "cache_discount": 0.95,
+          "locality": "remote",
+          "notes": "Bucle nativo Argon (Plan RO) -> Hydrogen (Exec RW) -> Argon (Recovery). Punto de reposo Omega_0."
+        },
+        {
+          "label": "Orchestrator (Carbon)",
+          "aliases": ["S3.APEX"],
+          "family": "gemini-4",
+          "stratum": 3,
+          "effort": "adaptive",
+          "adaptive_strata": [2, 3],
+          "cache_discount": 0.95,
+          "locality": "remote",
+          "notes": "Bucle nativo Carbon (Plan RO) -> Hydrogen (Exec RW) -> Carbon (Recovery) para arquitectura y migraciones complejas."
+        },
+        {
+          "label": "Gemini 4 Carbon",
+          "aliases": ["S3.APEX"],
+          "family": "gemini-4",
+          "stratum": 3,
+          "efforts": ["Low", "Medium", "High", "Extra"],
+          "cache_discount": 0.95,
+          "min_max_output_tokens": 32768,
+          "locality": "remote"
+        },
+        {
+          "label": "Gemini 4 Argon",
+          "aliases": ["S2.FORGE", "S2.ARCHIVE"],
+          "family": "gemini-4",
+          "stratum": 2,
+          "efforts": ["Low", "Medium", "High", "Extra"],
+          "cache_discount": 0.95,
+          "min_max_output_tokens": 32768,
+          "locality": "remote"
+        },
+        {
+          "label": "Gemini 4 Hydrogen",
+          "aliases": ["S1.PULSE"],
+          "family": "gemini-4",
+          "stratum": 1,
+          "efforts": ["Low", "Medium", "High", "Extra"],
+          "cache_discount": 0.95,
+          "locality": "remote",
+          "notes": "Motor cinético rápido; el nivel Extra (XHigh) eleva el gasto de salida por razonamiento extendido."
+        },
+        {
+          "label": "Gemini 3.8 Flash",
+          "aliases": ["S1.PULSE"],
+          "family": "gemini-3.8",
+          "stratum": 1,
+          "efforts": ["Low", "Medium", "High", "High (Fast)"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        },
+        {
+          "label": "Claude Opus 5.5",
+          "aliases": ["S3.APEX"],
+          "family": "claude-5.5",
+          "stratum": 3,
+          "efforts": ["Low", "Medium", "High"],
+          "cache_discount": 0.95,
+          "locality": "remote",
+          "specialties": ["formal_ring0", "epistemic_halt", "systems_typed"]
+        },
+        {
+          "label": "Claude Sonnet 5.5",
+          "aliases": ["S2.FORGE", "S2.ARCHIVE"],
+          "family": "claude-5.5",
+          "stratum": 2,
+          "efforts": ["Low", "Medium", "High"],
+          "cache_discount": 0.95,
+          "locality": "remote",
+          "specialties": ["systems_typed", "scoped_impl"]
+        },
+        {
+          "label": "GPT-OSS 120B (Medium)",
+          "aliases": ["S2.FORGE"],
+          "family": "gpt-oss",
+          "stratum": 2,
+          "efforts": ["Medium"],
+          "cache_discount": 0.0,
+          "locality": "remote",
+          "notes": "Endpoint OSS remoto en el IDE ([Notice]); NO constituye aislamiento físico local 127.0.0.1."
+        }
+      ]
+    },
+    "claude_code": {
+      "host_kind": "cli_or_ide",
+      "resting_default": "claude-sonnet-5-5",
+      "resting_alias": "S2.PILOT",
+      "role_bindings": {
+        "S0.VAULT": { "delegate_profile": "local_loopback" },
+        "S1.PULSE": { "target_label": "claude-haiku-5-5", "default_effort": "low" },
+        "S2.PILOT": { "target_label": "claude-sonnet-5-5", "default_effort": "medium" },
+        "S2.FORGE": { "target_label": "claude-sonnet-5-5", "default_effort": "low" },
+        "S2.ARCHIVE": { "target_label": "claude-sonnet-5-5", "default_effort": "medium" },
+        "S3.APEX": { "target_label": "claude-opus-5-5", "default_effort": "high" }
+      },
+      "how_to_apply": "Comando /model o variable CLAUDE_CODE_EFFORT={low,medium,high}",
+      "options": [
+        {
+          "label": "claude-opus-5-5",
+          "aliases": ["S3.APEX"],
+          "family": "claude-5.5",
+          "stratum": 3,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.95,
+          "locality": "remote"
+        },
+        {
+          "label": "claude-sonnet-5-5",
+          "aliases": ["S2.PILOT", "S2.FORGE", "S2.ARCHIVE"],
+          "family": "claude-5.5",
+          "stratum": 2,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.95,
+          "locality": "remote"
+        },
+        {
+          "label": "claude-haiku-5-5",
+          "aliases": ["S1.PULSE"],
+          "family": "claude-5.5",
+          "stratum": 1,
+          "efforts": ["low", "medium"],
+          "cache_discount": 0.90,
+          "locality": "remote"
+        }
+      ]
+    },
+    "codex_cli": {
+      "host_kind": "cli_or_ide",
+      "resting_default": "gpt-5.6 (medium)",
+      "resting_alias": "S2.PILOT",
+      "role_bindings": {
+        "S0.VAULT": { "delegate_profile": "local_loopback" },
+        "S1.PULSE": { "target_label": "gpt-5-mini", "default_effort": "low" },
+        "S2.PILOT": { "target_label": "gpt-5.6", "default_effort": "medium" },
+        "S2.FORGE": { "target_label": "gpt-5.6", "default_effort": "low" },
+        "S2.ARCHIVE": { "target_label": "gpt-5.6", "default_effort": "medium" },
+        "S3.APEX": { "target_label": "o3", "default_effort": "high" }
+      },
+      "how_to_apply": "Comando /model o variable OPENAI_REASONING_EFFORT={low,medium,high}",
+      "options": [
+        {
+          "label": "o3",
+          "aliases": ["S3.APEX"],
+          "family": "openai-o",
+          "stratum": 3,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        },
+        {
+          "label": "gpt-5.6",
+          "aliases": ["S2.PILOT", "S2.FORGE", "S2.ARCHIVE"],
+          "family": "openai-gpt",
+          "stratum": 2,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        },
+        {
+          "label": "gpt-5-mini",
+          "aliases": ["S1.PULSE"],
+          "family": "openai-gpt",
+          "stratum": 1,
+          "efforts": ["low", "medium"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        }
+      ]
+    },
+    "gemini_cli": {
+      "host_kind": "cli_or_ide",
+      "resting_default": "gemini-4-argon",
+      "resting_alias": "S2.PILOT",
+      "role_bindings": {
+        "S0.VAULT": { "delegate_profile": "local_loopback" },
+        "S1.PULSE": { "target_label": "gemini-3.8-flash", "default_effort": "high" },
+        "S2.PILOT": { "target_label": "gemini-4-argon", "default_effort": "medium" },
+        "S2.FORGE": { "target_label": "gemini-4-argon", "default_effort": "low" },
+        "S2.ARCHIVE": { "target_label": "gemini-4-argon", "default_effort": "medium" },
+        "S3.APEX": { "target_label": "gemini-4-carbon", "default_effort": "high" }
+      },
+      "how_to_apply": "Variable GEMINI_MODEL y GEMINI_THINKING_LEVEL={low,medium,high}",
+      "options": [
+        {
+          "label": "gemini-4-carbon",
+          "aliases": ["S3.APEX"],
+          "family": "gemini-4",
+          "stratum": 3,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.95,
+          "min_max_output_tokens": 32768,
+          "locality": "remote"
+        },
+        {
+          "label": "gemini-4-argon",
+          "aliases": ["S2.PILOT", "S2.FORGE", "S2.ARCHIVE"],
+          "family": "gemini-4",
+          "stratum": 2,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.95,
+          "min_max_output_tokens": 32768,
+          "locality": "remote"
+        },
+        {
+          "label": "gemini-3.8-flash",
+          "aliases": ["S1.PULSE"],
+          "family": "gemini-3.8",
+          "stratum": 1,
+          "efforts": ["high"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        }
+      ]
+    },
+    "local_loopback": {
+      "host_kind": "local_runtime",
+      "resting_default": "litert://gemma4-26b",
+      "resting_alias": "S2.PILOT",
+      "role_bindings": {
+        "S0.VAULT": { "target_label": "litert://gemma4-26b", "default_effort": "Standard" },
+        "S2.PILOT": { "target_label": "litert://gemma4-26b", "default_effort": "Standard" },
+        "S2.FORGE": { "target_label": "http://127.0.0.1:11434/v1", "default_effort": "Standard" },
+        "S2.ARCHIVE": { "target_label": "http://127.0.0.1:8000/v1", "default_effort": "Standard" }
+      },
+      "how_to_apply": "LiteRTAgentConfig o LocalOpenAIAgentConfig apuntando a 127.0.0.1",
+      "options": [
+        {
+          "label": "litert://gemma4-26b",
+          "aliases": ["S0.VAULT", "S2.PILOT"],
+          "family": "local-litert",
+          "stratum": 2,
+          "efforts": ["Standard"],
+          "cache_discount": 1.0,
+          "locality": "loopback"
+        },
+        {
+          "label": "http://127.0.0.1:11434/v1",
+          "aliases": ["S0.VAULT", "S2.FORGE"],
+          "family": "local-ollama",
+          "stratum": 2,
+          "efforts": ["Standard"],
+          "cache_discount": 1.0,
+          "locality": "loopback"
+        },
+        {
+          "label": "http://127.0.0.1:8000/v1",
+          "aliases": ["S0.VAULT", "S2.ARCHIVE"],
+          "family": "local-vllm",
+          "stratum": 2,
+          "efforts": ["Standard"],
+          "cache_discount": 1.0,
+          "locality": "loopback"
+        }
+      ]
+    },
+    "tri_swarm": {
+      "host_kind": "swarm_dispatcher",
+      "resting_default": "adapter:google/gemini-4-argon",
+      "resting_alias": "S2.PILOT",
+      "role_bindings": {
+        "S0.VAULT": { "delegate_profile": "local_loopback" },
+        "S1.PULSE": { "target_label": "adapter:google/gemini-3.8-flash", "default_effort": "fast" },
+        "S2.PILOT": { "target_label": "adapter:google/gemini-4-argon", "default_effort": "medium" },
+        "S2.FORGE": { "target_label": "adapter:loopback/qwen2.5-coder:14b", "default_effort": "low" },
+        "S2.ARCHIVE": { "target_label": "adapter:google/gemini-4-hydrogen", "default_effort": "medium" },
+        "S3.APEX": { "target_label": "adapter:openai/gpt-5.6", "default_effort": "high" }
+      },
+      "how_to_apply": "Variables MOSKV_ROLE_{VAULT,PULSE,PILOT,FORGE,ARCHIVE,APEX}=adapter:<ns>/<model>",
+      "options": [
+        {
+          "label": "adapter:openai/gpt-5.6",
+          "aliases": ["S3.APEX"],
+          "family": "openai-gpt",
+          "stratum": 3,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        },
+        {
+          "label": "adapter:google/gemini-4-argon",
+          "aliases": ["S2.PILOT", "S2.ARCHIVE"],
+          "family": "gemini-4",
+          "stratum": 2,
+          "efforts": ["low", "medium", "high"],
+          "cache_discount": 0.95,
+          "locality": "remote"
+        },
+        {
+          "label": "adapter:google/gemini-4-hydrogen",
+          "aliases": ["S1.PULSE", "S2.ARCHIVE"],
+          "family": "gemini-4",
+          "stratum": 1,
+          "efforts": ["fast", "low", "medium", "high"],
+          "cache_discount": 0.95,
+          "locality": "remote"
+        },
+        {
+          "label": "adapter:google/gemini-3.8-flash",
+          "aliases": ["S1.PULSE"],
+          "family": "gemini-3.8",
+          "stratum": 1,
+          "efforts": ["fast", "high"],
+          "cache_discount": 0.75,
+          "locality": "remote"
+        },
+        {
+          "label": "adapter:loopback/qwen2.5-coder:14b",
+          "aliases": ["S0.VAULT", "S2.FORGE"],
+          "family": "local-ollama",
+          "stratum": 2,
+          "efforts": ["low", "medium"],
+          "cache_discount": 1.0,
+          "locality": "loopback"
+        }
+      ]
+    }
+  }
+}

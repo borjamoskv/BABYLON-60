@@ -1,0 +1,15 @@
+{
+  "formal_properties": {
+    "NON_INTERFERENCE": "∀ o: ¬authorized(o) => ¬destroyed(o)",
+    "RECOVERABILITY": "crash(tx) => recover(tx) ∈ {COMMITTED, ABORTED, SECURITY_ABORT}",
+    "SAFETY": "COMMITTED(tx) => authorized(tx.object) ∧ quarantined(tx.object) ∧ verified(tx.object) ∧ effected(tx.object)"
+  },
+  "lean4_theorems": [
+    "auth_001_universal_inductive_safety",
+    "no_torn_reads_universal"
+  ],
+  "axioms_used": [
+    "propext"
+  ],
+  "model_checking_status": "MACHINE_CHECKED_INDUCTION_AND_DECIDE"
+}

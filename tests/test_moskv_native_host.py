@@ -1,0 +1,127 @@
+# ============================================================================
+# BABYLON-60 v4.0 Sovereign Hardened
+# █ AUTOCOGNITION-Ω | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
+# ============================================================================
+"""
+Unit tests for Native Messaging Transducer (scripts/moskv_native_host.py).
+Tests IPC frame reading, 32-bit LE packing, payload commitment, size limits, and event dispatch.
+"""
+
+import io
+import json
+import logging
+import struct
+import pytest
+from scripts.c5_cli.moskv_native_host import (
+    calculate_payload_commitment,
+    process_extension_event,
+    read_message_frame,
+    send_message_frame,
+)
+
+
+def test_payload_commitment() -> None:
+    raw = b'{"status": "READY"}'
+    hash_hex = calculate_payload_commitment(raw)
+    assert len(hash_hex) == 64
+    assert hash_hex == "a258bbbe3b975c9b5dded37eb0e8d77e64b7bec2c1a2f2b9247e06fecf3802a5"
+
+
+def test_read_send_message_frame_roundtrip() -> None:
+    payload = {"status": "READY", "exergy": 500.0}
+
+    # Test send_message_frame to in-memory buffer
+    buf = io.BytesIO()
+    success = send_message_frame(payload, stream=buf)
+    assert success is True
+
+    # Inspect binary stream layout
+    buf.seek(0)
+    data = buf.read()
+    length_prefix = struct.unpack("<I", data[:4])[0]
+    encoded_json = data[4:].decode("utf-8")
+    assert length_prefix == len(encoded_json)
+    assert json.loads(encoded_json) == payload
+
+    # Test read_message_frame from in-memory buffer
+    buf.seek(0)
+    read_result = read_message_frame(stream=buf)
+    assert read_result is not None
+    assert read_result["status"] == "READY"
+    assert read_result["exergy"] == 500.0
+    assert "_hash_commitment" in read_result
+
+
+def test_read_message_frame_exceeds_max_bytes(caplog: pytest.LogCaptureFixture) -> None:
+    caplog.set_level(logging.ERROR)
+    raw_payload = json.dumps({"data": "x" * 1000}).encode("utf-8")
+    buf = io.BytesIO(struct.pack("<I", len(raw_payload)) + raw_payload)
+
+    # Set max_bytes lower than payload length
+    result = read_message_frame(stream=buf, max_bytes=100)
+    assert result is None
+    assert "Payload length" in caplog.text
+
+
+def test_read_message_frame_truncated_stream(caplog: pytest.LogCaptureFixture) -> None:
+    caplog.set_level(logging.ERROR)
+    buf = io.BytesIO(struct.pack("<I", 100) + b"short")
+    result = read_message_frame(stream=buf)
+    assert result is None
+    assert "Truncated binary payload stream" in caplog.text
+
+
+def test_process_extension_event_dispatch(caplog: pytest.LogCaptureFixture) -> None:
+    caplog.set_level(logging.INFO)
+    logger = logging.getLogger("moskv_native_host")
+
+    # Dispatch READY status
+    process_extension_event({"status": "READY"}, logger)
+    assert "READY" in caplog.text
+
+    # Dispatch CRYSTALLIZED status
+    process_extension_event({"status": "CRYSTALLIZED", "url": "https://example.com/b60"}, logger)
+    assert "crystallized" in caplog.text.lower()
+
+    # Dispatch FATAL_ENTROPY status
+    process_extension_event({"status": "FATAL_ENTROPY", "error": "BFT Failure"}, logger)
+    assert "Byzantine Failure" in caplog.text
+
+
+def test_process_extension_event_ping(caplog: pytest.LogCaptureFixture) -> None:
+    caplog.set_level(logging.INFO)
+    logger = logging.getLogger("moskv_native_host")
+
+    # Dispatch PING cmd
+    process_extension_event({"cmd": "PING", "payload": "EchoTest_123"}, logger)
+    assert "PING received" in caplog.text
+
+
+def test_task_queue_fifo_lifecycle() -> None:
+    from scripts.c5_cli.moskv_native_host import QUEUE_FILE, enqueue_prompt, get_next_prompt, DEFAULT_PROMPT
+
+    # Clean previous queue
+    QUEUE_FILE.unlink(missing_ok=True)
+
+    # Empty queue returns default prompt
+    assert get_next_prompt() == DEFAULT_PROMPT
+
+    # Enqueue prompts
+    count1 = enqueue_prompt("Prompt Alpha")
+    assert count1 == 1
+    count2 = enqueue_prompt("Prompt Beta")
+    assert count2 == 2
+
+    # FIFO Dequeue
+    assert get_next_prompt() == "Prompt Alpha"
+    assert get_next_prompt() == "Prompt Beta"
+    assert get_next_prompt() == DEFAULT_PROMPT
+
+    QUEUE_FILE.unlink(missing_ok=True)
+
+
+def test_hermetic_selftest() -> None:
+    from scripts.c5_cli.moskv_native_host import run_selftest
+
+    logger = logging.getLogger("moskv_native_host")
+    assert run_selftest(logger) is True

@@ -1,0 +1,108 @@
+name: BABYLON-60
+version: "5.1.0"
+tagline: "Intelligence is not authority. Model-agnostic authorization broker."
+homepage: "https://babylon60.com"
+repo: "https://github.com/borjamoskv/BABYLON-60"
+license: "Sovereign Dual-License"
+base_models: ["model-agnostic"]  # no prompt-coupling to any specific LLM
+
+system_prompt:
+  description: >
+    BABYLON-60 does not operate via a single mutable system prompt.
+    Governance is implemented as immutable Ring contracts (Ring-0 to Ring-3)
+    applied at the harness layer, not injected as model text.
+  canonical_sources:
+    - path: ".babylon60rules"
+      role: "Root manifest. Binds all IDE entrypoints (Cursor, Windsurf, Codex, Claude, Cline, Roo, Copilot) via mandatory symlinks."
+    - path: ".agents/rules/MOSKV1_UNIVERSAL_PROMPT.md"
+      role: "Operational invariant for agent identity, execution rules and skill governance."
+    - path: "docs/03_guides/agent_contracts.md"
+      role: "Ring-stratified technical contracts activated per change scope."
+  authority_model: >
+    Authority ≠ prompt text. The Operator Root is a cryptographic key/role
+    in the environment. Prompt injection cannot escalate privileges (INV-OMEGA).
+
+toolset:
+  description: >
+    Tools are exposed via a mediated MCP broker, not raw shell passthrough.
+    Every tool invocation is subject to the effect broker's authorization check
+    before execution.
+  interfaces:
+    - name: "babylon-skills-mcp"
+      path: "crates/babylon-skills-mcp/"
+      protocol: "JSON-RPC 2.0 over stdio"
+      authorization: "GUARD fail-closed — DENIED or PRECONDITION_MISMATCH halts execution, no semantic workarounds."
+    - name: "SharedManifest (Ring-0 IPC)"
+      path: "00_ABZU_KERNEL/crates/"
+      spec: "64 B, align(64), C-ABI, Seqlock SPMC — lock-free reads, single-writer, zero torn-read under loom model checking."
+    - name: "Secure Enclave biometric gate"
+      path: "crates/ (enclave::)"
+      spec: "P-256 ECDSA via Apple Secure Enclave. reuseDuration=0. No replay, no alternative auth path."
+  veto_patterns:
+    - "Zero raw shell passthrough without broker mediation"
+    - "Zero .unwrap() in production paths (INV_C5_RUST_FAIL_FAST)"
+    - "Zero Arc<T> or usize as *mut T across FFI boundary (INV_C5_ZERO_POINTER_FFI)"
+
+compaction:
+  description: >
+    Context management in BABYLON-60 is governed by epistemic invariants,
+    not heuristic token trimming. The harness enforces a strict
+    observation/hypothesis/obligation separation (INV_C5_HUME_GUILLOTINE).
+  strategies:
+    - name: "Apoptosis Fail-Stop"
+      spec: "On epistemic halt: state transitions to POISONED=0xDEAD_6060. No retry, no synthetic signature. Ring-0 invariant."
+    - name: "LARSA-120 batch amortization"
+      spec: "BFT consensus and F_FULLFSYNC prohibited per individual event on hot-path. Minimum batch B*≥38 (tokens @10ms) / B*≥72,200 (microkernel @5µs). Restores η_exergy≥95% in SQLite L0 WAL."
+    - name: "INV_C5_HUME_GUILLOTINE"
+      spec: "Mandatory separation of observation, hypothesis and obligation. Guarantees require source, scope and reproducible check. Failures reported as failures; pending as NO_VERIFICADO."
+  evidence_scope: "CLAIMS.toml — L1_FORMAL to L4_EXPERIMENTAL evidence levels per claim."
+
+permissions:
+  description: >
+    Permission architecture is multi-layer: Ring contracts (0–3),
+    biometric hardware gate, and OS-level confinement requirement.
+  rings:
+    Ring-0:
+      scope: "Memory, IPC, biometry, Seqlock, SharedManifest"
+      gate: "Touch ID → Secure Enclave → causal hash of effect. Zero reuse. No alternatives."
+      formal: "Lean 4 BabylonTrace + Loom model checking"
+    Ring-1:
+      scope: "Lean/Z3 proofs, concurrency guarantees, formal invariants"
+      gate: "Lean 4 compilation + SMT falsification"
+    Ring-2:
+      scope: "CI, Git, dependencies, ledger, datasets, licenses"
+      gate: "cargo --locked, explicit merge before push to origin/main"
+    Ring-3:
+      scope: "UI, voice, docs, routes, output surfaces"
+      gate: "Semantic auditor + topological verifier"
+  key_invariants:
+    - id: "inv_01_manifest_layout"
+      statement: "SharedManifest layout is 64 bytes with 64-byte alignment and documented field offsets"
+      source: "CLAIMS.toml [claim.inv_01_manifest_layout]"
+      status: "verified"
+      evidence_level: "L2_IMPLEMENTATION"
+    - id: "inv_02_seqlock_concurrency"
+      statement: "Seqlock SPMC protocol model yields no torn read under bounded model checking (max 2 preemptions)"
+      source: "CLAIMS.toml [claim.inv_02_seqlock_concurrency]"
+      status: "verified"
+      evidence_level: "L1_FORMAL"
+    - id: "inv_04_fail_stop_halt"
+      statement: "Epistemic halt closes admission (POISONED, 0xDEAD_6060) and records evidence within bounded budget"
+      source: "CLAIMS.toml [claim.inv_04_fail_stop_halt]"
+      status: "verified"
+      evidence_level: "L2_IMPLEMENTATION"
+    - id: "cose_ed25519_receipt"
+      statement: "Receipts are formatted according to RFC 9942 and cryptographically signed with Ed25519"
+      source: "CLAIMS.toml [claim.cose_ed25519_receipt]"
+      status: "verified"
+      evidence_level: "L2_IMPLEMENTATION"
+    - id: "secure_enclave_p256"
+      statement: "The Apple Secure Enclave bridge verifies P-256 signatures; automated test uses software keys"
+      source: "CLAIMS.toml [claim.secure_enclave_p256]"
+      status: "verified_local"
+      evidence_level: "L2_IMPLEMENTATION"
+  sandbox_model: >
+    User-space broker at EL0 (macOS ARM64). Effective isolation requires
+    OS-level process confinement of the agent (L3). The broker alone does NOT
+    prevent a non-confined agent from bypassing mediation by writing directly.
+    See CLAIMS.toml [metadata.root_axiom_status] and README security note.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "BABYLON-60 · Invariantes del kernel"
+  short_description: "Audita SPSC, SQLite, LARSA y pruebas Rust–Lean"
+  default_prompt: "Usa $babylon60-kernel-invariants para auditar el componente solicitado y registrar evidencia de sus invariantes."
